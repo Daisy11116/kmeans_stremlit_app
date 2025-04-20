@@ -11,26 +11,29 @@ import pickle
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_blobs
 
-# load model
-with open('kmeans_model.pkl', 'rb') as f:
-    loaded_model = pickle.load (f)
-    
-# set the title
-st.title("K-means Clustering Visualizer by Thanchanok Komonnak")
-    
-# set the page config
+# Set page config — MUST be first Streamlit command
 st.set_page_config(page_title="k-Means Clustering App", layout="centered")
 
-# load dataset
+# Set the title
+st.title("K-means Clustering Visualizer by Thanchanok Komonnak")
+
+# Load model
+with open('kmeans_model.pkl', 'rb') as f:
+    loaded_model = pickle.load(f)
+
+# Load dataset
 X, _ = make_blobs(n_samples=300, centers=loaded_model.n_clusters, cluster_std=0.60, random_state=0)
 
-# predict using the loaded model
-y_kmeans = loaded_model. predict(X)
+# Predict using the loaded model
+y_kmeans = loaded_model.predict(X)
 
-# plotting
+# Plotting
 fig, ax = plt.subplots()
 scatter = ax.scatter(X[:, 0], X[:, 1], c=y_kmeans, cmap='viridis')
-ax.scatter(loaded_model.cluster_centers_[:, 0], loaded_model.cluster_centers_[:, 1], s=300, c='red')
+ax.scatter(loaded_model.cluster_centers_[:, 0], loaded_model.cluster_centers_[:, 1], s=300, c='red', marker='X')
 ax.set_title('k-Means Clustering')
-ax.legend()
+
+# Optional: if you want a legend, assign labels manually to your scatter plots
+
+# Show the plot in Streamlit
 st.pyplot(fig)
