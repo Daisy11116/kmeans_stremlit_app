@@ -15,7 +15,7 @@ from sklearn.datasets import make_blobs
 st.set_page_config(page_title="k-Means Clustering App", layout="centered")
 
 # Set the title
-st.title("K-means Clustering Visualizer by Thanchanok Komonnak")
+st.title("K-means Clustering Visualizer by Supatsara Saennang")
 
 # Load model
 with open('kmeans_model.pkl', 'rb') as f:
